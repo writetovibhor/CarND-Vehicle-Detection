@@ -345,8 +345,6 @@ def draw_labeled_bboxes(img, labels):
     # Return the image
     return img
 
-frame_count = 0
-
 def process_image(img):
     if PROCESS_TEST_IMAGES == False:
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)

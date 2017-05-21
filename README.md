@@ -93,13 +93,13 @@ Here's a [link to my video result](./output_vides/project_video.mp4).
 [![video on youtube](https://img.youtube.com/vi/7RrqpCHkOd0/0.jpg)](https://www.youtube.com/watch?v=7RrqpCHkOd0)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected, code for this step is contained in lines 309 through 394 of `pipeline.py`.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here are ten frames and their corresponding heatmaps:
 
 ![alt text][image5]
 
@@ -115,7 +115,10 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+First issue with this approach is performance, real-time solution will require use of GPU for doing most of the computation and scikit-learn will need to be replaced with some other library that supports GPU.
 
+Another problem I found is that if two cars are very close to each other or behind one-another then those are detected as single object due to overlapping bounding boxes. We can use perspective transform to identify cars in different lanes and sperate out the bounding boxes.
+
+One more issue is jumping of bounding box size, this can be reduced by averaging box size over few frames.
