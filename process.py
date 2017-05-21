@@ -6,7 +6,7 @@ import os
 import h5py
 import random
 
-PROCESS_TEST_IMAGES = True
+PROCESS_TEST_IMAGES = False
 DO_TRAIN = False
 DO_GRID_SEARCH = False
 

@@ -37,14 +37,16 @@ The code for this step is contained in line 26 through 43 of `process.py`.
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+| Vehicle                                        | Non Vehicle                                        |
+|------------------------------------------------|----------------------------------------------------|
+| ![car example](./examples/vehicle-example.png) | ![car example](./examples/non-vehicle-example.png) |
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-![alt text][image2]
+![hog visualization](./examples/hog-visualization.jpeg)
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
@@ -90,7 +92,7 @@ Ultimately I searched on four scales using YCrCb 1-channel HOG features plus spa
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./output_vides/project_video.mp4).
 
-[![video on youtube](https://img.youtube.com/vi/7RrqpCHkOd0/0.jpg)](https://www.youtube.com/watch?v=7RrqpCHkOd0)
+[![video on youtube](https://img.youtube.com/vi/8QsfY2IY_EQ/0.jpg)](https://www.youtube.com/watch?v=8QsfY2IY_EQ)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -101,13 +103,13 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ### Here are ten frames and their corresponding heatmaps:
 
-![alt text][image5]
+![heatmap frames](./examples/heatmap-frames.jpeg)
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![heatmap labels](./examples/heatmap-labels.jpg)
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+![heatmap final](./examples/heatmap-final.jpg)
 
 
 
